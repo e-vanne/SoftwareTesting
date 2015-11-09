@@ -3,8 +3,8 @@ ui 90
 wend 80
 emily 80
 hehe 70
+player 60
 nano 60
 wendy 60
 howdy 60
-titan 50
-luca 20
+hermione 50

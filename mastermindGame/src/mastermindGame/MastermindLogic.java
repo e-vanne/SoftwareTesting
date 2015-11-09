@@ -96,10 +96,12 @@ public class MastermindLogic {
 		List<ScoreModel> newTopRanks = new ArrayList<ScoreModel>();
 
 		boolean flag = true;
-		int i=0,topTen = 10;
+		int index=0;
+		int topTen = 10;
+		
 		for (ScoreModel score : topRanks) {
-			i++;
-			if (i < topTen) {
+			if (index < topTen) {
+				index++;
 				if (myScore >= Integer.valueOf(score.getScore()) && flag == true) {
 					ScoreModel model = new ScoreModel();
 
@@ -107,7 +109,6 @@ public class MastermindLogic {
 					model.setScore(String.valueOf(myScore));
 
 					newTopRanks.add(model);
-					newTopRanks.add(score);
 
 					flag = false;
 				} else {
