@@ -1,6 +1,8 @@
 package mastermindGame;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -45,7 +47,6 @@ public class MastermindLogic {
 		int matchingColor = 0;
 		for (int i = 0; i < template.length(); i++) {
 			char tem = template.charAt(i);
-			
 
 			for (int j = 0; j < input.length(); j++) {
 				char in = input.charAt(j);
@@ -54,7 +55,6 @@ public class MastermindLogic {
 				}
 			}
 		}
-
 		return matchingColor;
 
 	}
@@ -70,4 +70,52 @@ public class MastermindLogic {
 
 		return null;
 	}
+
+	public static int Scoring(int times) {
+		int score = 110;
+		return score - (times * 10);
+	}
+
+	public static boolean ranking(int times) {
+
+		int myScore = Scoring(times);
+		List<ScoreModel> topRanks = ScoreService.parsing();
+
+		for (ScoreModel score : topRanks) {
+			if (myScore >= Integer.valueOf(score.getScore())) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	public static void newTopTen(String name, int times) {
+		int myScore = Scoring(times);
+		List<ScoreModel> topRanks = ScoreService.parsing();
+		List<ScoreModel> newTopRanks = new ArrayList<ScoreModel>();
+
+		boolean flag = true;
+		int i=0,topTen = 10;
+		for (ScoreModel score : topRanks) {
+			i++;
+			if (i < topTen) {
+				if (myScore >= Integer.valueOf(score.getScore()) && flag == true) {
+					ScoreModel model = new ScoreModel();
+
+					model.setName(name);
+					model.setScore(String.valueOf(myScore));
+
+					newTopRanks.add(model);
+					newTopRanks.add(score);
+
+					flag = false;
+				} else {
+					newTopRanks.add(score);
+				}
+			}
+		}
+		ScoreService.newRanking(newTopRanks);
+	}
+
 }
