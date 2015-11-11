@@ -1,5 +1,5 @@
-yeah 100
-ui 90
+moi 100
+Ivanne 90
 wend 80
 emily 80
 hehe 70

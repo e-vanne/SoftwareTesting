@@ -20,14 +20,6 @@ proctype Player()
 {	
 	Start: atomic {
 		printf("\n Player start \n");
-		if 
-		:: PlayerInterface?askStore ->
-			PlayerInterface!answerStore;
-			goto Start;
-		:: PlayerInterface?askName ->
-			PlayerInterface!name;
-			goto Start;
-		fi
 		PlayerInterface!try;
 		goto Next1;
 	}
@@ -37,10 +29,27 @@ proctype Player()
 		if
 		:: PlayerInterface?result -> 
 			PlayerInterface!try; 
-			goto Start;		
+			goto Next1;		
 		:: PlayerInterface?endMessage -> 
-			goto Start;
+			goto Next2;
 		fi
+	}
+		
+	Next2: atomic {
+		printf("\n Player Next2 \n");
+		if 
+		:: PlayerInterface?askStore ->
+			PlayerInterface!answerStore;
+			goto Next3;
+		fi
+		goto Start;
+	}
+	
+	Next3: atomic {
+		printf("\n Player Next3 \n");
+		PlayerInterface?askName;
+		PlayerInterface!name;
+		/* goto Start; */
 	}
 }
 
@@ -80,7 +89,7 @@ proctype Interface ()
 		printf("\n Interface Next3 \n");
 		PlayerInterface?name;
 			InterfaceScoreFile!storeScore;
-		goto Start;
+		/* goto Start; */
 	}
 }
 
@@ -97,7 +106,7 @@ proctype ScoreFile ()
 		printf("\n ScoreFile Next1 \n");
 		InterfaceScoreFile?storeScore;
 			printf("\n store score \n");
-		goto Start;
+		/* goto Start; */
 	}
 }
 

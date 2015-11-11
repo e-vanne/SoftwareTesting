@@ -17,7 +17,7 @@ public class ScoreService {
 	int rnd;
 
 	public ScoreService() {
-		filePath = "/Users/Mew/Documents/workspaceArch/mastermindGame/src/mastermindGame/ScoreFile.txt";
+		filePath = "/home/e-vanne/Documents/Cours/3A/SoftwareTesting/SoftwareTesting/mastermindGame/src/mastermindGame/ScoreFile.txt";
 		wordArray = new String[2][50];
 		lineNo = 0;
 		parsing();
