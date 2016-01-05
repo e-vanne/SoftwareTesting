@@ -40,7 +40,6 @@ public class MastermindLogic {
 		}
 
 		return countWellPlace;
-
 	}
 
 	public static int checkMatchingColor(String template, String input) {
